@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星河导航 - 发现精彩网站</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌟</text></svg>">
+</head>
+<body>
+    <!-- 背景星星 -->
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <!-- 页面头部 -->
+        <header class="fade-in">
+            <div class="logo">
+                <i class="fas fa-star"></i>
+                <span class="logo-text">星河导航</span>
+                <i class="fas fa-star"></i>
+            </div>
+            <p class="tagline">发现精彩，连接世界——为您精选优质网站资源</p>
+        </header>
+        
+        <!-- 主要内容区域 -->
+        <div class="main-content">
+            <!-- 特色网站展示 -->
+            <section class="featured-card fade-in delay-1">
+                <div class="featured-header">
+                    <h2><i class="fas fa-crown"></i> 精选推荐</h2>
+                    <div class="url">dreamer.page.gd</div>
+                </div>
+                <div class="featured-body">
+                    <h3>星河为梦</h3>
+                    <p id="featured-description">正在加载网站介绍...</p>
+                    <a href="https://dreamer.page.gd" target="_blank" class="btn" id="featured-link">
+                        <i class="fas fa-rocket"></i> 进入星河为梦
+                    </a>
+                </div>
+            </section>
+            
+            <!-- 网站列表 -->
+            <section class="websites-section">
+                <h2 class="section-title fade-in"><i class="fas fa-compass"></i> 探索更多精彩</h2>
+                
+                <div class="websites-grid" id="websites-container">
+                    <!-- 这里将通过JavaScript动态生成网站卡片 -->
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i> 正在加载网站列表...
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- 页脚 -->
+        <footer class="fade-in delay-3">
+            <p>© 2023 星河导航 | 设计精美，用心连接每一个精彩网站</p>
+            <p>本页面适配所有移动设备，确保最佳浏览体验</p>
+            <p class="github-link">
+                <a href="https://github.com" target="_blank" class="github-btn">
+                    <i class="fab fa-github"></i> 查看GitHub项目
+                </a>
+            </p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
