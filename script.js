@@ -244,7 +244,7 @@ function addGitHubLink() {
     const githubBtn = document.querySelector('.github-btn');
     if (githubBtn) {
         // 在实际项目中，这里应该替换为您的GitHub仓库链接
-        githubBtn.href = 'https://github.com/yourusername/starnavigation';
+        githubBtn.href = 'https://github.com/Jeremy121215';
     }
 }
 
