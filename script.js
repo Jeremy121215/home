@@ -143,7 +143,7 @@ function getWebsiteIcon(websiteName, description, type) {
     }
     
     // 探索更多精彩板块的图标
-    if (name.includes('星河') || name.includes('梦想') || name.includes('个人')) {
+    if (name.includes('个人')) {
         return 'fas fa-star';
     }
     if (name.includes('科技') || desc.includes('科技') || desc.includes('技术') || desc.includes('ai') || desc.includes('人工智能')) {
