@@ -1,5 +1,64 @@
 // 网站数据加载和页面交互
 
+// 图标映射表
+const iconMap = {
+  0: "fas fa-globe", // 默认图标
+  1: "fas fa-user",
+  2: "fas fa-code",
+  3: "fas fa-tools",
+  4: "fas fa-file-alt",
+  5: "fas fa-chart-line",
+  6: "fas fa-music",
+  7: "fas fa-gamepad",
+  8: "fas fa-rocket",
+  9: "fas fa-palette",
+  10: "fas fa-cogs",
+  11: "fas fa-globe",
+  12: "fas fa-desktop",
+  13: "fas fa-laptop-code",
+  14: "fas fa-magic",
+  15: "fas fa-star"
+};
+
+// 标签映射表
+const tagMap = {
+  0: "", // 无标签
+  1: "个人",
+  2: "工具",
+  3: "开发",
+  4: "学习",
+  5: "娱乐",
+  6: "游戏",
+  7: "文件",
+  8: "测试",
+  9: "音乐",
+  10: "绘图",
+  11: "创意",
+  12: "实用",
+  13: "技术",
+  14: "资源",
+  15: "项目"
+};
+
+// 标签颜色映射
+const tagColorMap = {
+  1: "#4CAF50", // 个人 - 绿色
+  2: "#2196F3", // 工具 - 蓝色
+  3: "#9C27B0", // 开发 - 紫色
+  4: "#FF9800", // 学习 - 橙色
+  5: "#FF5722", // 娱乐 - 深橙色
+  6: "#795548", // 游戏 - 棕色
+  7: "#607D8B", // 文件 - 蓝灰色
+  8: "#009688", // 测试 - 青色
+  9: "#E91E63", // 音乐 - 粉色
+  10: "#3F51B5", // 绘图 - 靛蓝色
+  11: "#00BCD4", // 创意 - 青色
+  12: "#8BC34A", // 实用 - 浅绿色
+  13: "#FFC107", // 技术 - 琥珀色
+  14: "#673AB7", // 资源 - 深紫色
+  15: "#F44336"  // 项目 - 红色
+};
+
 document.addEventListener('DOMContentLoaded', function() {
     // 初始化星星背景
     createStars();
@@ -92,14 +151,15 @@ function renderWebsiteCards(type, websitesData) {
             card.className = `test-website-card fade-in ${delayClass}`;
         }
         
-        // 根据网站类型设置图标
-        const icon = getWebsiteIcon(website["网站名称"], website["介绍"], type);
-        
-        // 获取标签
-        const tag = getWebsiteTag(website["网站名称"], website["介绍"], type);
+        // 获取图标和标签
+        const icon = getWebsiteIcon(website["图标"]);
+        const tag = getWebsiteTag(website["标签"]);
         
         card.innerHTML = `
-            <h3><i class="${icon}"></i> ${website["网站名称"]}${tag}</h3>
+            <div class="card-header">
+                <h3><i class="${icon}"></i> ${website["网站名称"]}</h3>
+                ${tag}
+            </div>
             <div class="url">${website["网址"]}</div>
             <p>${website["介绍"]}</p>
             <a href="${website["网址"]}" target="_blank" class="btn">
@@ -111,112 +171,39 @@ function renderWebsiteCards(type, websitesData) {
     });
 }
 
-// 根据网站信息获取图标
-function getWebsiteIcon(websiteName, description, type) {
-    const name = websiteName.toLowerCase();
-    const desc = description.toLowerCase();
-    
-    // 测试开发板块的特殊图标
-    if (type === 'test') {
-        if (name.includes('测试') || desc.includes('测试')) {
-            return 'fas fa-vial';
-        }
-        if (name.includes('开发') || desc.includes('开发') || desc.includes('编程')) {
-            return 'fas fa-code';
-        }
-        if (name.includes('调试') || desc.includes('调试')) {
-            return 'fas fa-bug';
-        }
-        if (name.includes('文档') || desc.includes('文档')) {
-            return 'fas fa-book';
-        }
-        if (name.includes('工具') || desc.includes('工具')) {
-            return 'fas fa-tools';
-        }
-        if (name.includes('api') || desc.includes('api')) {
-            return 'fas fa-cloud';
-        }
-        if (name.includes('部署') || desc.includes('部署')) {
-            return 'fas fa-rocket';
-        }
-        return 'fas fa-laptop-code';
+// 根据数字获取图标
+function getWebsiteIcon(iconNumber) {
+    // 如果未定义或为null，使用默认图标
+    if (iconNumber === undefined || iconNumber === null) {
+        return iconMap[0];
     }
     
-    // 探索更多精彩板块的图标
-    if (name.includes('个人')) {
-        return 'fas fa-star';
-    }
-    if (name.includes('科技') || desc.includes('科技') || desc.includes('技术') || desc.includes('ai') || desc.includes('人工智能')) {
-        return 'fas fa-microchip';
-    }
-    if (name.includes('设计') || desc.includes('设计') || desc.includes('创意') || desc.includes('艺术')) {
-        return 'fas fa-palette';
-    }
-    if (name.includes('学习') || desc.includes('学习') || desc.includes('教育') || desc.includes('课程')) {
-        return 'fas fa-graduation-cap';
-    }
-    if (name.includes('旅行') || desc.includes('旅行') || desc.includes('旅游') || desc.includes('摄影')) {
-        return 'fas fa-plane';
-    }
-    if (name.includes('健康') || desc.includes('健康') || desc.includes('健身') || desc.includes('医疗')) {
-        return 'fas fa-heartbeat';
-    }
-    if (name.includes('音乐') || desc.includes('音乐') || desc.includes('歌曲')) {
-        return 'fas fa-music';
-    }
-    if (name.includes('美食') || desc.includes('美食') || desc.includes('烹饪') || desc.includes('食谱')) {
-        return 'fas fa-utensils';
-    }
-    if (name.includes('购物') || desc.includes('购物') || desc.includes('电商') || desc.includes('商品')) {
-        return 'fas fa-shopping-cart';
-    }
-    if (name.includes('社交') || desc.includes('社交') || desc.includes('社区') || desc.includes('论坛')) {
-        return 'fas fa-users';
-    }
+    // 确保是数字
+    const num = parseInt(iconNumber);
     
-    return 'fas fa-globe';
+    // 如果数字在映射表中，返回对应的图标，否则返回默认图标
+    return iconMap[num] || iconMap[0];
 }
 
-// 获取网站标签
-function getWebsiteTag(websiteName, description, type) {
-    const name = websiteName.toLowerCase();
-    const desc = description.toLowerCase();
-    
-    // 测试开发板块的标签
-    if (type === 'test') {
-        if (name.includes('测试') || desc.includes('测试')) {
-            return '<span class="website-tag test-tag">测试</span>';
-        }
-        if (name.includes('开发') || desc.includes('开发') || desc.includes('编程')) {
-            return '<span class="website-tag test-tag">开发</span>';
-        }
-        if (name.includes('工具') || desc.includes('工具')) {
-            return '<span class="website-tag test-tag">工具</span>';
-        }
-        if (name.includes('文档') || desc.includes('文档')) {
-            return '<span class="website-tag test-tag">文档</span>';
-        }
-        if (name.includes('部署') || desc.includes('部署')) {
-            return '<span class="website-tag test-tag">部署</span>';
-        }
-        return '<span class="website-tag test-tag">开发</span>';
+// 根据数字获取标签
+function getWebsiteTag(tagNumber) {
+    // 如果未定义、为null或为0，返回空字符串
+    if (tagNumber === undefined || tagNumber === null || tagNumber === 0) {
+        return '';
     }
     
-    // 探索更多精彩板块的标签
-    if (name.includes('星河') || name.includes('梦想')) {
-        return '<span class="website-tag">个人</span>';
-    }
-    if (name.includes('科技') || desc.includes('科技') || desc.includes('技术')) {
-        return '<span class="website-tag">科技</span>';
-    }
-    if (name.includes('设计') || desc.includes('设计')) {
-        return '<span class="website-tag">设计</span>';
-    }
-    if (name.includes('学习') || desc.includes('学习')) {
-        return '<span class="website-tag">学习</span>';
-    }
+    // 确保是数字
+    const num = parseInt(tagNumber);
     
-    return '';
+    // 如果数字在映射表中，返回对应的标签，否则返回空
+    const tagText = tagMap[num];
+    if (!tagText) return '';
+    
+    // 获取标签颜色
+    const tagColor = tagColorMap[num] || '#5c6bc0';
+    
+    // 返回带样式的标签
+    return `<span class="website-tag" style="background-color: ${tagColor}20; color: ${tagColor}; border-left-color: ${tagColor};">${tagText}</span>`;
 }
 
 // 显示错误信息
@@ -244,7 +231,7 @@ function addGitHubLink() {
     const githubBtn = document.querySelector('.github-btn');
     if (githubBtn) {
         // 在实际项目中，这里应该替换为您的GitHub仓库链接
-        githubBtn.href = 'https://github.com/Jeremy121215';
+        githubBtn.href = 'https://github.com/yourusername/starnavigation';
     }
 }
 
